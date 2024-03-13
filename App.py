@@ -94,28 +94,28 @@ while True:
             if choice2 == "1":
                 results = show_all_styles()
                 for i in results:
-                    print(i)
+                    print(i[0], i[1], i[2])
 
             elif choice2 == "2":
                 results = show_all_options()
                 for i in results:
-                    print(i)
+                    print(i[0], i[1], i[2], i[3], i[4], i[5])
 
             elif choice2 == "3":
                 product = input("Please type product ID: ")
                 results = show_options_for_style(product)
                 for i in results:
-                    print(i)
+                    print(i[0], i[1], i[2], i[3], i[4], i[5])
 
             elif choice2 == "4":
                 results = show_all_customers()
                 for i in results:
-                    print(i)
+                    print(i[0], i[1], i[2], i[3], i[4])
 
             elif choice2 == "5":
                 results = show_all_orders()
                 for i in results:
-                    print(i)
+                    print(i[0], i[1], i[2])
 
             elif choice2.lower() == "x":
                 break
