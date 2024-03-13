@@ -81,7 +81,7 @@ while True:
 
     if choice1 == "1":
         while True:
-        #   viewing menu
+            #   viewing menu
             choice2 = input("""
     Press 1 to view all styles,
     Press 2 to view all options,
@@ -98,20 +98,24 @@ while True:
 
             elif choice2 == "2":
                 results = show_all_options()
-                print(results)
+                for i in results:
+                    print(i)
 
             elif choice2 == "3":
                 product = input("Please type product ID: ")
                 results = show_options_for_style(product)
-                print(results)
+                for i in results:
+                    print(i)
 
             elif choice2 == "4":
                 results = show_all_customers()
-                print(results)
+                for i in results:
+                    print(i)
 
             elif choice2 == "5":
                 results = show_all_orders()
-                print(results)
+                for i in results:
+                    print(i)
 
             elif choice2.lower() == "x":
                 break
@@ -124,7 +128,7 @@ while True:
                 break
             else:
                 print("That is not the admin coede")
-        
+
         while True:
             #   edit data menu
             choice3 = input("""
@@ -136,7 +140,7 @@ while True:
             if choice3 == "1":
                 #   needs work
                 print("This is currently unavailable")
-            
+
             elif choice3 == "2":
                 #   needs work
                 print("This is currently unavailable")
@@ -145,4 +149,4 @@ while True:
                 break
 
     elif choice1.lower() == "x":
-            break
+        break
