@@ -72,36 +72,77 @@ def show_all_orders():
 #   menu
 print("Welcome to the Jade Furniture Database.")
 while True:
-    choice = input("""
+    #   first menu
+    choice1 = input("""
+    Press 1 to view data,
+    Press 2 to edit data,
+    or press X to exit: """)
+    print("")
+
+    if choice1 == "1":
+        while True:
+        #   viewing menu
+            choice2 = input("""
     Press 1 to view all styles,
     Press 2 to view all options,
     Press 3 to view all options for a style,
     Press 4 to view all customers,
     Press 5 to view all orders,
     or press X to exit: """)
-    print("")
+            print("")
 
-    if choice == "1":
-        results = show_all_styles()
-        for i in results:
-            print(i)
+            if choice2 == "1":
+                results = show_all_styles()
+                for i in results:
+                    print(i)
 
-    elif choice == "2":
-        results = show_all_options()
-        print(results)
+            elif choice2 == "2":
+                results = show_all_options()
+                print(results)
 
-    elif choice == "3":
-        product = input("Please type product ID: ")
-        results = show_options_for_style(product)
-        print(results)
+            elif choice2 == "3":
+                product = input("Please type product ID: ")
+                results = show_options_for_style(product)
+                print(results)
 
-    elif choice == "4":
-        results = show_all_customers()
-        print(results)
+            elif choice2 == "4":
+                results = show_all_customers()
+                print(results)
 
-    elif choice == "5":
-        results = show_all_orders()
-        print(results)
+            elif choice2 == "5":
+                results = show_all_orders()
+                print(results)
 
-    elif choice.lower() == "x":
-        break
+            elif choice2.lower() == "x":
+                break
+
+    if choice1 == "2":
+        admincode = "123"
+        while True:
+            password = input("Please enter admin code to contiue: ")
+            if password == admincode:
+                break
+            else:
+                print("That is not the admin coede")
+        
+        while True:
+            #   edit data menu
+            choice3 = input("""
+    Press 1 to add data,
+    Press 2 to delete data,
+    or press X to exit: """)
+            print("")
+
+            if choice3 == "1":
+                #   needs work
+                print("This is currently unavailable")
+            
+            elif choice3 == "2":
+                #   needs work
+                print("This is currently unavailable")
+
+            elif choice3.lower() == "x":
+                break
+
+    elif choice1.lower() == "x":
+            break
