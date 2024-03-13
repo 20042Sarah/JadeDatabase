@@ -49,6 +49,19 @@ def show_all_customers():
     return results
 
 
+def show_all_orders():
+    db = sqlite3.connect("Jade1.db")
+    cursor = db.cursor()
+    sql = """SELECT Customers.FirstName, Customers.LastName, Orders.Product
+                FROM Orders
+                LEFT JOIN Customers ON Orders.Customer = Customers.CustomerID;
+                """
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    db.close()
+    return results
+
+
 #   menu
 print("Welcome to the Jade Furniture Database.")
 while True:
@@ -57,6 +70,7 @@ while True:
     Press 2 to view all options,
     Press 3 to view all options for a style,
     Press 4 to view all customers,
+    Press 5 to view all orders,
     or press X to exit: """)
     print("")
 
@@ -75,6 +89,10 @@ while True:
 
     elif choice == "4":
         results = show_all_customers()
+        print(results)
+
+    elif choice == "5":
+        results = show_all_options()
         print(results)
 
     elif choice.lower() == "x":
