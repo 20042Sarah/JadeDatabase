@@ -92,7 +92,7 @@ while True:
         print(results)
 
     elif choice == "5":
-        results = show_all_options()
+        results = show_all_orders()
         print(results)
 
     elif choice.lower() == "x":
