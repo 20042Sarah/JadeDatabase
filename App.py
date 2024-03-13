@@ -59,10 +59,6 @@ while True:
         product = input("Please type product ID: ")
         results = show_options_for_style(product)
         print(results)
-    
-    elif choice == "4":
-        results = show_all_customers()
-        print(results)
 
     elif choice.lower() == "x":
         break
