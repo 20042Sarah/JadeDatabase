@@ -4,6 +4,7 @@ import sqlite3
 
 #   functions
 def show_all_styles():
+    #   shows all data in the Furniture table
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
     sql = "SELECT * FROM Furniture;"
@@ -14,6 +15,8 @@ def show_all_styles():
 
 
 def show_all_options():
+    #   shows all data in the Options table
+    #   changes ProductID to the style's name
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
     sql = """SELECT Furniture.Name, Options.Seats, Options.Width,
@@ -28,6 +31,7 @@ def show_all_options():
 
 
 def show_options_for_style(Product_ID):
+    #   shows all data from the Options table for a certain ProductID
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
     sql = """SELECT Option_ID, Seats, Width, Depth, Height, Price
@@ -40,6 +44,7 @@ def show_options_for_style(Product_ID):
 
 
 def show_all_customers():
+    #   shows all data from the Customers table
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
     sql = "SELECT * FROM Customers;"
@@ -50,6 +55,8 @@ def show_all_customers():
 
 
 def show_all_orders():
+    #   shows all data from the orders table
+    #   changes CustomerID to the customer's first and last name
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
     sql = """SELECT Customers.FirstName, Customers.LastName, Orders.Product
@@ -76,7 +83,8 @@ while True:
 
     if choice == "1":
         results = show_all_styles()
-        print(results)
+        for i in results:
+            print(i)
 
     elif choice == "2":
         results = show_all_options()
