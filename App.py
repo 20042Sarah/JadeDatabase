@@ -68,6 +68,14 @@ def show_all_orders():
     db.close()
     return results
 
+def add_furniture(name, type):
+    db = sqlite3.connect("Jade1.db")
+    cursor = db.cursor()
+    sql = """INSERT INTO Furniture (Name, Type)
+                VALUES ('%s', '%s');""" % (name, type)
+    cursor.execute(sql)
+    db.commit()
+
 
 #   menu
 print("Welcome to the Jade Furniture Database.")
@@ -138,8 +146,30 @@ while True:
             print("")
 
             if choice3 == "1":
-                #   needs work
-                print("This is currently unavailable")
+                choice4 = input("""
+    Press 1 to add data to Furniture Database,
+    Press 2 to add data to Options Datatbase,
+    Press 3 to add data to Customer Database,
+    Press 4 to add data to Orders Database,
+    or press X to exit: """)
+                print("")
+                if choice4 == "1":
+                    name = input("Please enter name: ")
+                    type = input("Please enter type: ")
+                    add_furniture(name, type)
+                    results = show_all_styles()
+                    print("")
+                    print("Here is the updated table: ")
+                    for i in results:
+                        print(i[0], i[1], i[2])
+                elif choice4 == "2":
+                    print("This is currently unavailable")
+                elif choice4 == "3":
+                    print("This is currently unavailable")
+                elif choice4 == "4":
+                    print("This is currently unavailable")
+                elif choice4.lower() == "x":
+                    break
 
             elif choice3 == "2":
                 #   needs work
