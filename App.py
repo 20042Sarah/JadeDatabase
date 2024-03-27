@@ -68,6 +68,7 @@ def show_all_orders():
     db.close()
     return results
 
+
 def add_furniture(name, type):
     #   adds data to Furniture database
     db = sqlite3.connect("Jade1.db")
@@ -77,12 +78,14 @@ def add_furniture(name, type):
     cursor.execute(sql)
     db.commit()
 
+
 def add_option(product, seats, width, depth, height, price):
     #   adds data to Options database
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
-    sql = """INSERT INTO Options (Product_ID, Seats, Width, Depth, Height, Price)
-                VALUES ('%s', '%s', '%s', '%s', '%s', '%s');""" % (int(product), float(seats), int(width), int(depth), int(height), int(price))
+    sql = """INSERT INTO Options
+                (Product_ID, Seats, Width, Depth, Height, Price)
+                VALUES ('%s', '%s', '%s', '%s', '%s', '%s');""" % (product, seats, width, depth, height, price)
     cursor.execute(sql)
     db.commit()
 
@@ -164,6 +167,7 @@ while True:
     or press X to exit: """)
                 print("")
                 if choice4 == "1":
+                    #   adding data to Furniture database
                     name = input("Please enter name: ")
                     type = input("Please enter type: ")
                     add_furniture(name, type)
@@ -172,18 +176,52 @@ while True:
                     print("Here is the updated table: ")
                     for i in results:
                         print(i[0], i[1], i[2])
+
                 elif choice4 == "2":
-                    product = input("Please enter Product ID: ")
-                    seats = input("Please enter number of seats: ")
-                    width = input("Please enter width: ")
-                    depth = input("Please enter depth: ")
-                    height = input("Please enter height: ")
-                    price = input("Please enter price: ")
+                    #   adding data to Options database
+                    while True:
+                        #   could try and check that product id exists
+                        try:
+                            product = int(input("Please enter Product ID: "))
+                            break
+                        except ValueError:
+                            print("That is not a valid input.")
+                    while True:
+                        try:
+                            seats = float(input("Please enter number of seats: "))
+                            break
+                        except ValueError:
+                            print("That is not a valid input.")
+                    while True:
+                        try:
+                            width = int(input("Please enter width: "))
+                            break
+                        except ValueError:
+                            print("That is not a valid input.")
+                    while True:
+                        try:
+                            depth = int(input("Please enter depth: "))
+                            break
+                        except ValueError:
+                            print("That is not a valid input.")
+                    while True:
+                        try:
+                            height = int(input("Please enter height: "))
+                            break
+                        except ValueError:
+                            print("That is not a valid input.")
+                    while True:
+                        try:
+                            price = int(input("Please enter price: "))
+                            break
+                        except ValueError:
+                            print("That is not a valid input.")
                     print("")
                     add_option(product, seats, width, depth, height, price)
                     results = show_all_options()
                     for i in results:
                         print(i[0], i[1], i[2], i[3], i[4], i[5])
+
                 elif choice4 == "3":
                     print("This is currently unavailable")
                 elif choice4 == "4":
