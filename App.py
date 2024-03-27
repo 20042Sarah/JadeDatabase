@@ -146,6 +146,16 @@ def delete_customers(customer):
     db.commit()
 
 
+def delete_orders(customer, product):
+    #   deletes data from Orders table
+    db = sqlite3.connect("Jade1.db")
+    cursor = db.cursor()
+    sql = """DELETE FROM Orders WHERE Customer = %s and Product = %s;
+            """ % (customer, product)
+    cursor.execute(sql)
+    db.commit()
+
+
 #   menu
 print("Welcome to the Jade Furniture Database.")
 while True:
@@ -340,6 +350,7 @@ while True:
                     print("")
 
                     if choice4 == "1":
+                        #   deleting data from Furniture table
                         product = input("Please enter the Product ID: ")
                         print("")
                         delete_furniture(product)
@@ -349,6 +360,7 @@ while True:
                             print(i[0], i[1], i[2])
 
                     elif choice4 == "2":
+                        #   deleting data from Options table
                         option = input("Please enter the Option ID: ")
                         print("")
                         delete_options(option)
@@ -358,6 +370,7 @@ while True:
                             print(i[0], i[1], i[2], i[3], i[4], i[5])
 
                     elif choice4 == "3":
+                        #   deleting data from Customers table
                         customer = input("Please enter the Customer ID: ")
                         print("")
                         delete_customers(customer)
@@ -367,8 +380,16 @@ while True:
                             print(i[0], i[1], i[2], i[3], i[4])
 
                     elif choice4 == "4":
-                        #   needs work
-                        print()
+                        #   deleting data from Orders table
+                        customer = input("Please enter the Customer ID: ")
+                        product = input("Please enter the Option ID: ")
+                        print("")
+                        delete_orders(customer, product)
+                        print("Here is the updated table: ")
+                        results = show_all_orders()
+                        for i in results:
+                            print(i[0], i[1], i[2], i[3])
+
                     elif choice4.lower() == "x":
                         break
 
