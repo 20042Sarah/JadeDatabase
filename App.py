@@ -3,6 +3,8 @@ import sqlite3
 
 
 #   functions
+
+#   show functions
 def show_all_styles():
     #   shows all data in the Furniture table
     db = sqlite3.connect("Jade1.db")
@@ -72,6 +74,7 @@ def show_all_orders():
     return results
 
 
+#   add functions
 def add_furniture(name, type):
     #   adds data to Furniture table
     db = sqlite3.connect("Jade1.db")
@@ -115,11 +118,21 @@ def add_order(customer, product):
     db.commit()
 
 
+#   delete functions
 def delete_furniture(product):
     #   adds data to Orders table
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
     sql = """DELETE FROM Furniture WHERE Product_ID = %s;""" % product
+    cursor.execute(sql)
+    db.commit()
+
+
+def delete_options(option):
+    #   adds data to Orders table
+    db = sqlite3.connect("Jade1.db")
+    cursor = db.cursor()
+    sql = """DELETE FROM Options WHERE Option_ID = %s;""" % option
     cursor.execute(sql)
     db.commit()
 
@@ -327,8 +340,14 @@ while True:
                             print(i[0], i[1], i[2])
 
                     elif choice4 == "2":
-                        #   needs work
-                        print()
+                        option = input("Please enter the Option ID: ")
+                        print("")
+                        delete_options(option)
+                        print("Here is the updated table: ")
+                        results = show_all_options()
+                        for i in results:
+                            print(i[0], i[1], i[2], i[3], i[4], i[5])
+
                     elif choice4 == "3":
                         #   needs work
                         print()
