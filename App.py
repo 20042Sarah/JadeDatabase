@@ -85,7 +85,19 @@ def add_option(product, seats, width, depth, height, price):
     cursor = db.cursor()
     sql = """INSERT INTO Options
                 (Product_ID, Seats, Width, Depth, Height, Price)
-                VALUES ('%s', '%s', '%s', '%s', '%s', '%s');""" % (product, seats, width, depth, height, price)
+                VALUES ('%s', '%s', '%s', '%s', '%s', '%s');
+                """ % (product, seats, width, depth, height, price)
+    cursor.execute(sql)
+    db.commit()
+
+
+def add_customer(first, last, address, phone):
+    #   adds data to Customers database
+    db = sqlite3.connect("Jade1.db")
+    cursor = db.cursor()
+    sql = """INSERT INTO Customers (FirstName, LastName, Address, Phone)
+                VALUES ('%s', '%s', '%s', '%s');
+                """ % (first, last, address, phone)
     cursor.execute(sql)
     db.commit()
 
@@ -167,7 +179,7 @@ while True:
     or press X to exit: """)
                 print("")
                 if choice4 == "1":
-                    #   adding data to Furniture database
+                    #   adding data to Furniture table
                     name = input("Please enter name: ")
                     type = input("Please enter type: ")
                     add_furniture(name, type)
@@ -178,7 +190,7 @@ while True:
                         print(i[0], i[1], i[2])
 
                 elif choice4 == "2":
-                    #   adding data to Options database
+                    #   adding data to Options table
                     while True:
                         #   could try and check that product id exists
                         try:
@@ -188,7 +200,8 @@ while True:
                             print("That is not a valid input.")
                     while True:
                         try:
-                            seats = float(input("Please enter number of seats: "))
+                            seats = input("Please enter number of seats: ")
+                            seats = float(seats)
                             break
                         except ValueError:
                             print("That is not a valid input.")
@@ -218,12 +231,29 @@ while True:
                             print("That is not a valid input.")
                     print("")
                     add_option(product, seats, width, depth, height, price)
+                    print("Here is the updated table: ")
                     results = show_all_options()
                     for i in results:
                         print(i[0], i[1], i[2], i[3], i[4], i[5])
 
                 elif choice4 == "3":
-                    print("This is currently unavailable")
+                    #   adding data to Customers table
+                    first = input("Please enter first name: ")
+                    last = input("Please enter last name: ")
+                    address = input("Please enter adress: ")
+                    while True:
+                        try:
+                            phone = int(input("Please enter phone number: "))
+                            break
+                        except ValueError:
+                            print("That is not a valid input.")
+                    print("")
+                    add_customer(first, last, address, phone)
+                    print("Here is the updated table: ")
+                    results = show_all_customers()
+                    for i in results:
+                        print(i[0], i[1], i[2], i[3], i[4])
+
                 elif choice4 == "4":
                     print("This is currently unavailable")
                 elif choice4.lower() == "x":
