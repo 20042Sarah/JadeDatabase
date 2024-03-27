@@ -69,10 +69,20 @@ def show_all_orders():
     return results
 
 def add_furniture(name, type):
+    #   adds data to Furniture database
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
     sql = """INSERT INTO Furniture (Name, Type)
                 VALUES ('%s', '%s');""" % (name, type)
+    cursor.execute(sql)
+    db.commit()
+
+def add_option(product, seats, width, depth, height, price):
+    #   adds data to Options database
+    db = sqlite3.connect("Jade1.db")
+    cursor = db.cursor()
+    sql = """INSERT INTO Options (Product_ID, Seats, Width, Depth, Height, Price)
+                VALUES ('%s', '%s', '%s', '%s', '%s', '%s');""" % (int(product), float(seats), int(width), int(depth), int(height), int(price))
     cursor.execute(sql)
     db.commit()
 
@@ -163,7 +173,17 @@ while True:
                     for i in results:
                         print(i[0], i[1], i[2])
                 elif choice4 == "2":
-                    print("This is currently unavailable")
+                    product = input("Please enter Product ID: ")
+                    seats = input("Please enter number of seats: ")
+                    width = input("Please enter width: ")
+                    depth = input("Please enter depth: ")
+                    height = input("Please enter height: ")
+                    price = input("Please enter price: ")
+                    print("")
+                    add_option(product, seats, width, depth, height, price)
+                    results = show_all_options()
+                    for i in results:
+                        print(i[0], i[1], i[2], i[3], i[4], i[5])
                 elif choice4 == "3":
                     print("This is currently unavailable")
                 elif choice4 == "4":
