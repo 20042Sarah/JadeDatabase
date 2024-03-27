@@ -193,141 +193,150 @@ while True:
             print("")
 
             if choice3 == "1":
-                choice4 = input("""
-    Press 1 to add data to Furniture table,
-    Press 2 to add data to Options table,
-    Press 3 to add data to Customer table,
-    Press 4 to add data to Orders table,
-    or press X to exit: """)
-                print("")
-                if choice4 == "1":
-                    #   adding data to Furniture table
-                    name = input("Please enter name: ")
-                    type = input("Please enter type: ")
-                    add_furniture(name, type)
-                    results = show_all_styles()
+                #   add data menu
+                while True:
+                    choice4 = input("""
+        Press 1 to add data to Furniture table,
+        Press 2 to add data to Options table,
+        Press 3 to add data to Customer table,
+        Press 4 to add data to Orders table,
+        or press X to exit: """)
                     print("")
-                    print("Here is the updated table: ")
-                    for i in results:
-                        print(i[0], i[1], i[2])
+                    if choice4 == "1":
+                        #   adding data to Furniture table
+                        name = input("Please enter name: ")
+                        type = input("Please enter type: ")
+                        add_furniture(name, type)
+                        results = show_all_styles()
+                        print("")
+                        print("Here is the updated table: ")
+                        for i in results:
+                            print(i[0], i[1], i[2])
 
-                elif choice4 == "2":
-                    #   adding data to Options table
-                    while True:
-                        #   could try and check that product id exists
-                        try:
-                            product = int(input("Please enter Product ID: "))
-                            break
-                        except ValueError:
-                            print("That is not a valid input.")
-                    while True:
-                        try:
-                            seats = input("Please enter number of seats: ")
-                            seats = float(seats)
-                            break
-                        except ValueError:
-                            print("That is not a valid input.")
-                    while True:
-                        try:
-                            width = int(input("Please enter width: "))
-                            break
-                        except ValueError:
-                            print("That is not a valid input.")
-                    while True:
-                        try:
-                            depth = int(input("Please enter depth: "))
-                            break
-                        except ValueError:
-                            print("That is not a valid input.")
-                    while True:
-                        try:
-                            height = int(input("Please enter height: "))
-                            break
-                        except ValueError:
-                            print("That is not a valid input.")
-                    while True:
-                        try:
-                            price = int(input("Please enter price: "))
-                            break
-                        except ValueError:
-                            print("That is not a valid input.")
-                    print("")
-                    add_option(product, seats, width, depth, height, price)
-                    print("Here is the updated table: ")
-                    results = show_all_options()
-                    for i in results:
-                        print(i[0], i[1], i[2], i[3], i[4], i[5])
+                    elif choice4 == "2":
+                        #   adding data to Options table
+                        while True:
+                            #   could try and check that product id exists
+                            try:
+                                product = input("Please enter Product ID: ")
+                                product = int(product)
+                                break
+                            except ValueError:
+                                print("That is not a valid input.")
+                        while True:
+                            try:
+                                seats = input("Please enter number of seats: ")
+                                seats = float(seats)
+                                break
+                            except ValueError:
+                                print("That is not a valid input.")
+                        while True:
+                            try:
+                                width = int(input("Please enter width: "))
+                                break
+                            except ValueError:
+                                print("That is not a valid input.")
+                        while True:
+                            try:
+                                depth = int(input("Please enter depth: "))
+                                break
+                            except ValueError:
+                                print("That is not a valid input.")
+                        while True:
+                            try:
+                                height = int(input("Please enter height: "))
+                                break
+                            except ValueError:
+                                print("That is not a valid input.")
+                        while True:
+                            try:
+                                price = int(input("Please enter price: "))
+                                break
+                            except ValueError:
+                                print("That is not a valid input.")
+                        print("")
+                        add_option(product, seats, width, depth, height, price)
+                        print("Here is the updated table: ")
+                        results = show_all_options()
+                        for i in results:
+                            print(i[0], i[1], i[2], i[3], i[4], i[5])
 
-                elif choice4 == "3":
-                    #   adding data to Customers table
-                    first = input("Please enter first name: ")
-                    last = input("Please enter last name: ")
-                    address = input("Please enter adress: ")
-                    while True:
-                        try:
-                            phone = int(input("Please enter phone number: "))
-                            break
-                        except ValueError:
-                            print("That is not a valid input.")
-                    print("")
-                    add_customer(first, last, address, phone)
-                    print("Here is the updated table: ")
-                    results = show_all_customers()
-                    for i in results:
-                        print(i[0], i[1], i[2], i[3], i[4])
+                    elif choice4 == "3":
+                        #   adding data to Customers table
+                        first = input("Please enter first name: ")
+                        last = input("Please enter last name: ")
+                        address = input("Please enter adress: ")
+                        while True:
+                            try:
+                                phone = input("Please enter phone number: ")
+                                phone = int(phone)
+                                break
+                            except ValueError:
+                                print("That is not a valid input.")
+                        print("")
+                        add_customer(first, last, address, phone)
+                        print("Here is the updated table: ")
+                        results = show_all_customers()
+                        for i in results:
+                            print(i[0], i[1], i[2], i[3], i[4])
 
-                elif choice4 == "4":
-                    #   adding data to Orders table
-                    while True:
-                        try:
-                            customer = int(input("Please enter Customer ID: "))
-                            break
-                        except ValueError:
-                            print("That is not a valid input.")
-                    while True:
-                        try:
-                            product = int(input("Please enter Option ID: "))
-                            break
-                        except ValueError:
-                            print("That is not a valid input.")
-                    print("")
-                    add_order(customer, product)
-                    print("Here is the updated table: ")
-                    results = show_all_orders()
-                    for i in results:
-                        print(i[0], i[1], i[2], i[3])
+                    elif choice4 == "4":
+                        #   adding data to Orders table
+                        while True:
+                            try:
+                                customer = input("Please enter Customer ID: ")
+                                customer = int(customer)
+                                break
+                            except ValueError:
+                                print("That is not a valid input.")
+                        while True:
+                            try:
+                                product = input("Please enter Option ID: ")
+                                product = int(product)
+                                break
+                            except ValueError:
+                                print("That is not a valid input.")
+                        print("")
+                        add_order(customer, product)
+                        print("Here is the updated table: ")
+                        results = show_all_orders()
+                        for i in results:
+                            print(i[0], i[1], i[2], i[3])
 
-                elif choice4.lower() == "x":
-                    break
+                    elif choice4.lower() == "x":
+                        break
 
             elif choice3 == "2":
                 #   delete data menu
-                choice4 = input("""
-    Press 1 to delete data from Furniture table,
-    Press 2 to delete data from Options table,
-    Press 3 to delete data from Customer table,
-    Press 4 to delete data from Orders table,
-    or press X to exit: """)
-                print("")
-
-                if choice4 == "1":
-                    product = input("Please enter the Product ID: ")
+                while True:
+                    choice4 = input("""
+        Press 1 to delete data from Furniture table,
+        Press 2 to delete data from Options table,
+        Press 3 to delete data from Customer table,
+        Press 4 to delete data from Orders table,
+        or press X to exit: """)
                     print("")
-                    delete_furniture(product)
-                    print("Here is the updated table: ")
-                    results = show_all_styles()
-                    for i in results:
-                        print(i[0], i[1], i[2])
 
-                elif choice4 == "2":
-                    #   needs work
-                    print()
-                elif choice4 == "3":
-                    #   needs work
-                    print()
-                elif choice4 == "4":
-                    #   needs work
-                    print()
+                    if choice4 == "1":
+                        product = input("Please enter the Product ID: ")
+                        print("")
+                        delete_furniture(product)
+                        print("Here is the updated table: ")
+                        results = show_all_styles()
+                        for i in results:
+                            print(i[0], i[1], i[2])
+
+                    elif choice4 == "2":
+                        #   needs work
+                        print()
+                    elif choice4 == "3":
+                        #   needs work
+                        print()
+                    elif choice4 == "4":
+                        #   needs work
+                        print()
+                    elif choice4.lower() == "x":
+                        break
 
             elif choice3.lower() == "x":
                 break
