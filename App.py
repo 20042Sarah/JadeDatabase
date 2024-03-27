@@ -120,7 +120,7 @@ def add_order(customer, product):
 
 #   delete functions
 def delete_furniture(product):
-    #   adds data to Orders table
+    #   deletes data from Furniture table
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
     sql = """DELETE FROM Furniture WHERE Product_ID = %s;""" % product
@@ -129,10 +129,19 @@ def delete_furniture(product):
 
 
 def delete_options(option):
-    #   adds data to Orders table
+    #   deletes data from Options table
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
     sql = """DELETE FROM Options WHERE Option_ID = %s;""" % option
+    cursor.execute(sql)
+    db.commit()
+
+
+def delete_customers(customer):
+    #   deletes data from Customers table
+    db = sqlite3.connect("Jade1.db")
+    cursor = db.cursor()
+    sql = """DELETE FROM Customers WHERE CustomerID = %s;""" % customer
     cursor.execute(sql)
     db.commit()
 
@@ -349,8 +358,14 @@ while True:
                             print(i[0], i[1], i[2], i[3], i[4], i[5])
 
                     elif choice4 == "3":
-                        #   needs work
-                        print()
+                        customer = input("Please enter the Customer ID: ")
+                        print("")
+                        delete_customers(customer)
+                        print("Here is the updated table: ")
+                        results = show_all_customers()
+                        for i in results:
+                            print(i[0], i[1], i[2], i[3], i[4])
+
                     elif choice4 == "4":
                         #   needs work
                         print()
