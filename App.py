@@ -102,6 +102,16 @@ def add_customer(first, last, address, phone):
     db.commit()
 
 
+def add_order(customer, product):
+    #   adds data to Orders database
+    db = sqlite3.connect("Jade1.db")
+    cursor = db.cursor()
+    sql = """INSERT INTO Orders (Customer, Product)
+                VALUES ('%s', '%s');""" % (customer, product)
+    cursor.execute(sql)
+    db.commit()
+
+
 #   menu
 print("Welcome to the Jade Furniture Database.")
 while True:
@@ -255,7 +265,26 @@ while True:
                         print(i[0], i[1], i[2], i[3], i[4])
 
                 elif choice4 == "4":
-                    print("This is currently unavailable")
+                    #   adding data to Orders table
+                    while True:
+                        try:
+                            customer = int(input("Please enter Customer ID: "))
+                            break
+                        except ValueError:
+                            print("That is not a valid input.")
+                    while True:
+                        try:
+                            product = int(input("Please enter Option ID: "))
+                            break
+                        except ValueError:
+                            print("That is not a valid input.")
+                    print("")
+                    add_order(customer, product)
+                    print("Here is the updated table: ")
+                    results = show_all_orders()
+                    for i in results:
+                        print(i[0], i[1], i[2])
+
                 elif choice4.lower() == "x":
                     break
 
