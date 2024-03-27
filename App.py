@@ -59,10 +59,13 @@ def show_all_orders():
     #   changes CustomerID to the customer's first and last name
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
-    sql = """SELECT Customers.FirstName, Customers.LastName, Orders.Product
+    sql = """SELECT Customers.FirstName, Customers.LastName, Furniture.Name,
+                Options.Option_ID
                 FROM Orders
-                LEFT JOIN Customers ON Orders.Customer = Customers.CustomerID;
-                """
+                LEFT JOIN Customers ON Orders.Customer = Customers.CustomerID
+                LEFT JOIN Options ON Orders.Product = Options.Option_ID
+                LEFT JOIN Furniture ON Options.Product_ID =
+                Furniture.Product_ID;"""
     cursor.execute(sql)
     results = cursor.fetchall()
     db.close()
@@ -158,7 +161,7 @@ while True:
             elif choice2 == "5":
                 results = show_all_orders()
                 for i in results:
-                    print(i[0], i[1], i[2])
+                    print(i[0], i[1], i[2], i[3])
 
             elif choice2.lower() == "x":
                 break
@@ -283,7 +286,7 @@ while True:
                     print("Here is the updated table: ")
                     results = show_all_orders()
                     for i in results:
-                        print(i[0], i[1], i[2])
+                        print(i[0], i[1], i[2], i[3])
 
                 elif choice4.lower() == "x":
                     break
