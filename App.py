@@ -73,7 +73,7 @@ def show_all_orders():
 
 
 def add_furniture(name, type):
-    #   adds data to Furniture database
+    #   adds data to Furniture table
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
     sql = """INSERT INTO Furniture (Name, Type)
@@ -83,7 +83,7 @@ def add_furniture(name, type):
 
 
 def add_option(product, seats, width, depth, height, price):
-    #   adds data to Options database
+    #   adds data to Options table
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
     sql = """INSERT INTO Options
@@ -95,7 +95,7 @@ def add_option(product, seats, width, depth, height, price):
 
 
 def add_customer(first, last, address, phone):
-    #   adds data to Customers database
+    #   adds data to Customers table
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
     sql = """INSERT INTO Customers (FirstName, LastName, Address, Phone)
@@ -106,11 +106,20 @@ def add_customer(first, last, address, phone):
 
 
 def add_order(customer, product):
-    #   adds data to Orders database
+    #   adds data to Orders table
     db = sqlite3.connect("Jade1.db")
     cursor = db.cursor()
     sql = """INSERT INTO Orders (Customer, Product)
                 VALUES ('%s', '%s');""" % (customer, product)
+    cursor.execute(sql)
+    db.commit()
+
+
+def delete_furniture(product):
+    #   adds data to Orders table
+    db = sqlite3.connect("Jade1.db")
+    cursor = db.cursor()
+    sql = """DELETE FROM Furniture WHERE Product_ID = %s;""" % product
     cursor.execute(sql)
     db.commit()
 
@@ -185,10 +194,10 @@ while True:
 
             if choice3 == "1":
                 choice4 = input("""
-    Press 1 to add data to Furniture Database,
-    Press 2 to add data to Options Datatbase,
-    Press 3 to add data to Customer Database,
-    Press 4 to add data to Orders Database,
+    Press 1 to add data to Furniture table,
+    Press 2 to add data to Options table,
+    Press 3 to add data to Customer table,
+    Press 4 to add data to Orders table,
     or press X to exit: """)
                 print("")
                 if choice4 == "1":
@@ -292,8 +301,33 @@ while True:
                     break
 
             elif choice3 == "2":
-                #   needs work
-                print("This is currently unavailable")
+                #   delete data menu
+                choice4 = input("""
+    Press 1 to delete data from Furniture table,
+    Press 2 to delete data from Options table,
+    Press 3 to delete data from Customer table,
+    Press 4 to delete data from Orders table,
+    or press X to exit: """)
+                print("")
+
+                if choice4 == "1":
+                    product = input("Please enter the Product ID: ")
+                    print("")
+                    delete_furniture(product)
+                    print("Here is the updated table: ")
+                    results = show_all_styles()
+                    for i in results:
+                        print(i[0], i[1], i[2])
+
+                elif choice4 == "2":
+                    #   needs work
+                    print()
+                elif choice4 == "3":
+                    #   needs work
+                    print()
+                elif choice4 == "4":
+                    #   needs work
+                    print()
 
             elif choice3.lower() == "x":
                 break
