@@ -204,17 +204,17 @@ while True:
                 for i in results:
                     print(i[0], i[1], i[2], i[3])
 
-            elif choice2.lower() == "x":
+            elif choice2.upper() == "X":
                 break
 
-    if choice1 == "2":
+    elif choice1 == "2":
         admincode = "123"
         while True:
-            password = input("Please enter admin code to contiue: ")
+            password = input("Please enter admin code to continue: ")
             if password == admincode:
                 break
             else:
-                print("That is not the admin coede")
+                print("That is not the admin code")
 
         while True:
             #   edit data menu
@@ -297,7 +297,7 @@ while True:
                         #   adding data to Customers table
                         first = input("Please enter first name: ")
                         last = input("Please enter last name: ")
-                        address = input("Please enter adress: ")
+                        address = input("Please enter address: ")
                         while True:
                             try:
                                 phone = input("Please enter phone number: ")
@@ -335,7 +335,7 @@ while True:
                         for i in results:
                             print(i[0], i[1], i[2], i[3])
 
-                    elif choice4.lower() == "x":
+                    elif choice4.upper() == "X":
                         break
 
             elif choice3 == "2":
@@ -390,11 +390,11 @@ while True:
                         for i in results:
                             print(i[0], i[1], i[2], i[3])
 
-                    elif choice4.lower() == "x":
+                    elif choice4.upper() == "X":
                         break
 
-            elif choice3.lower() == "x":
+            elif choice3.upper() == "X":
                 break
 
-    elif choice1.lower() == "x":
+    elif choice1.upper() == "X":
         break
