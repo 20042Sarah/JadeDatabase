@@ -211,7 +211,11 @@ while True:
     elif choice1 == "2":
         admincode = "123"
         while True:
+<<<<<<< HEAD
             password = input("Please enter admin code to continue or type X to exit: ")
+=======
+            password = input("Please enter admin code to continue: ")
+>>>>>>> 244334cc896e4d998e123e285320ea78196f238b
             if password == admincode:
                 break
             else:
