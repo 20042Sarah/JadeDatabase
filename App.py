@@ -111,7 +111,7 @@ def add_customer(first, last, address, phone):
 
 def add_order(customer, product):
     #   adds data to Orders table
-    db = sqlite3.connect("Jade1.db")
+    db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = """INSERT INTO Orders (Customer, Product)
                 VALUES ('%s', '%s');""" % (customer, product)
@@ -122,7 +122,7 @@ def add_order(customer, product):
 #   delete functions
 def delete_furniture(product):
     #   deletes data from Furniture table
-    db = sqlite3.connect("Jade1.db")
+    db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = """DELETE FROM Furniture WHERE Product_ID = %s;""" % product
     cursor.execute(sql)
@@ -131,7 +131,7 @@ def delete_furniture(product):
 
 def delete_options(option):
     #   deletes data from Options table
-    db = sqlite3.connect("Jade1.db")
+    db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = """DELETE FROM Options WHERE Option_ID = %s;""" % option
     cursor.execute(sql)
@@ -140,7 +140,7 @@ def delete_options(option):
 
 def delete_customers(customer):
     #   deletes data from Customers table
-    db = sqlite3.connect("Jade1.db")
+    db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = """DELETE FROM Customers WHERE CustomerID = %s;""" % customer
     cursor.execute(sql)
@@ -149,7 +149,7 @@ def delete_customers(customer):
 
 def delete_orders(customer, product):
     #   deletes data from Orders table
-    db = sqlite3.connect("Jade1.db")
+    db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = """DELETE FROM Orders WHERE Customer = %s and Product = %s;
             """ % (customer, product)
@@ -211,7 +211,11 @@ while True:
     elif choice1 == "2":
         admincode = "123"
         while True:
+<<<<<<< HEAD
+            password = input("Please enter admin code to continue or type X to exit: ")
+=======
             password = input("Please enter admin code to continue: ")
+>>>>>>> 244334cc896e4d998e123e285320ea78196f238b
             if password == admincode:
                 break
             else:
