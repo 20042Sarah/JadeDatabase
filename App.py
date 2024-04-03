@@ -3,11 +3,12 @@ import sqlite3
 
 
 #   functions
+dbname = "Jade1.db"
 
 #   show functions
 def show_all_styles():
     #   shows all data in the Furniture table
-    db = sqlite3.connect("Jade1.db")
+    db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = "SELECT * FROM Furniture;"
     cursor.execute(sql)
@@ -19,7 +20,7 @@ def show_all_styles():
 def show_all_options():
     #   shows all data in the Options table
     #   changes ProductID to the style's name
-    db = sqlite3.connect("Jade1.db")
+    db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = """SELECT Furniture.Name, Options.Seats, Options.Width,
             Options.Depth, Options.Height, Options.Price
@@ -34,7 +35,7 @@ def show_all_options():
 
 def show_options_for_style(Product_ID):
     #   shows all data from the Options table for a certain ProductID
-    db = sqlite3.connect("Jade1.db")
+    db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = """SELECT Option_ID, Seats, Width, Depth, Height, Price
                 FROM Options
@@ -47,7 +48,7 @@ def show_options_for_style(Product_ID):
 
 def show_all_customers():
     #   shows all data from the Customers table
-    db = sqlite3.connect("Jade1.db")
+    db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = "SELECT * FROM Customers;"
     cursor.execute(sql)
@@ -59,7 +60,7 @@ def show_all_customers():
 def show_all_orders():
     #   shows all data from the orders table
     #   changes CustomerID to the customer's first and last name
-    db = sqlite3.connect("Jade1.db")
+    db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = """SELECT Customers.FirstName, Customers.LastName, Furniture.Name,
                 Options.Option_ID
@@ -77,7 +78,7 @@ def show_all_orders():
 #   add functions
 def add_furniture(name, type):
     #   adds data to Furniture table
-    db = sqlite3.connect("Jade1.db")
+    db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = """INSERT INTO Furniture (Name, Type)
                 VALUES ('%s', '%s');""" % (name, type)
@@ -87,7 +88,7 @@ def add_furniture(name, type):
 
 def add_option(product, seats, width, depth, height, price):
     #   adds data to Options table
-    db = sqlite3.connect("Jade1.db")
+    db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = """INSERT INTO Options
                 (Product_ID, Seats, Width, Depth, Height, Price)
@@ -99,7 +100,7 @@ def add_option(product, seats, width, depth, height, price):
 
 def add_customer(first, last, address, phone):
     #   adds data to Customers table
-    db = sqlite3.connect("Jade1.db")
+    db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = """INSERT INTO Customers (FirstName, LastName, Address, Phone)
                 VALUES ('%s', '%s', '%s', '%s');
