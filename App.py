@@ -190,7 +190,7 @@ while True:
                     print(i[0], i[1], i[2], i[3], i[4], i[5])
 
             elif choice2 == "3":
-                product = input("Please type product ID: ")
+                product = input("Please type an existing product ID: ")
                 results = show_options_for_style(product)
                 for i in results:
                     print(i[0], i[1], i[2], i[3], i[4], i[5])
@@ -242,8 +242,8 @@ while True:
                     print("")
                     if choice4 == "1":
                         #   adding data to Furniture table
-                        name = input("Please enter name: ")
-                        type = input("Please enter type: ")
+                        name = input("Please enter the new name: ")
+                        type = input("Please enter type (e.g. chair or suite): ")
                         add_furniture(name, type)
                         results = show_all_styles()
                         print("")
@@ -256,7 +256,7 @@ while True:
                         while True:
                             #   could try and check that product id exists
                             try:
-                                product = input("Please enter Product ID: ")
+                                product = input("Please enter existing Product ID: ")
                                 product = int(product)
                                 break
                             except ValueError:
@@ -270,19 +270,19 @@ while True:
                                 print("That is not a valid input.")
                         while True:
                             try:
-                                width = int(input("Please enter width: "))
+                                width = int(input("Please enter width in mm: "))
                                 break
                             except ValueError:
                                 print("That is not a valid input.")
                         while True:
                             try:
-                                depth = int(input("Please enter depth: "))
+                                depth = int(input("Please enter depth in mm: "))
                                 break
                             except ValueError:
                                 print("That is not a valid input.")
                         while True:
                             try:
-                                height = int(input("Please enter height: "))
+                                height = int(input("Please enter height in mm: "))
                                 break
                             except ValueError:
                                 print("That is not a valid input.")
@@ -301,12 +301,12 @@ while True:
 
                     elif choice4 == "3":
                         #   adding data to Customers table
-                        first = input("Please enter first name: ")
-                        last = input("Please enter last name: ")
-                        address = input("Please enter address: ")
+                        first = input("Please enter new customer's first name: ")
+                        last = input("Please enter new customer's last name: ")
+                        address = input("Please enter their address: ")
                         while True:
                             try:
-                                phone = input("Please enter phone number: ")
+                                phone = input("Please enter their phone number: ")
                                 phone = int(phone)
                                 break
                             except ValueError:
@@ -322,14 +322,14 @@ while True:
                         #   adding data to Orders table
                         while True:
                             try:
-                                customer = input("Please enter Customer ID: ")
+                                customer = input("Please enter existing Customer ID: ")
                                 customer = int(customer)
                                 break
                             except ValueError:
                                 print("That is not a valid input.")
                         while True:
                             try:
-                                product = input("Please enter Option ID: ")
+                                product = input("Please enter existing Option ID: ")
                                 product = int(product)
                                 break
                             except ValueError:
@@ -357,7 +357,7 @@ while True:
 
                     if choice4 == "1":
                         #   deleting data from Furniture table
-                        product = input("Please enter the Product ID: ")
+                        product = input("Please enter the current Product ID: ")
                         print("")
                         delete_furniture(product)
                         print("Here is the updated table: ")
@@ -367,7 +367,7 @@ while True:
 
                     elif choice4 == "2":
                         #   deleting data from Options table
-                        option = input("Please enter the Option ID: ")
+                        option = input("Please enter the current Option ID: ")
                         print("")
                         delete_options(option)
                         print("Here is the updated table: ")
@@ -377,7 +377,7 @@ while True:
 
                     elif choice4 == "3":
                         #   deleting data from Customers table
-                        customer = input("Please enter the Customer ID: ")
+                        customer = input("Please enter the current Customer ID: ")
                         print("")
                         delete_customers(customer)
                         print("Here is the updated table: ")
@@ -387,8 +387,8 @@ while True:
 
                     elif choice4 == "4":
                         #   deleting data from Orders table
-                        customer = input("Please enter the Customer ID: ")
-                        product = input("Please enter the Option ID: ")
+                        customer = input("Please enter the current Customer ID: ")
+                        product = input("Please enter the current Option ID: ")
                         print("")
                         delete_orders(customer, product)
                         print("Here is the updated table: ")
