@@ -166,6 +166,16 @@ def delete_orders(customer, product):
     db.commit()
 
 
+#   menu functions
+def check_ids(idname, table, id):
+    db = sqlite3.connect(dbname)
+    cursor = db.cursor()
+    sql = """SELECT %s FROM %s""" % (idname, table)
+    cursor.execute(sql)
+    db.commit()
+    results = cursor.fetchall()
+    db.close()
+
 #   menu
 print("Welcome to the Jade Furniture Database.")
 while True:
@@ -233,11 +243,11 @@ while True:
                 #   add data menu
                 while True:
                     choice4 = input("""
-        Press 1 to add data to Furniture table,
-        Press 2 to add data to Options table,
-        Press 3 to add data to Customer table,
-        Press 4 to add data to Orders table,
-        or press X to exit: """)
+    Press 1 to add data to Furniture table,
+    Press 2 to add data to Options table,
+    Press 3 to add data to Customer table,
+    Press 4 to add data to Orders table,
+    or press X to exit: """)
                     print("")
                     if choice4 == "1":
                         #   adding data to Furniture table
@@ -302,7 +312,7 @@ while True:
                         while True:
                             try:
                                 phone = input("Please enter their phone number: ")
-                                phone = int(phone)
+                                check = int(phone)
                                 break
                             except ValueError:
                                 print("That is not a valid input.")
@@ -339,11 +349,11 @@ while True:
                 #   delete data menu
                 while True:
                     choice4 = input("""
-        Press 1 to delete data from Furniture table,
-        Press 2 to delete data from Options table,
-        Press 3 to delete data from Customer table,
-        Press 4 to delete data from Orders table,
-        or press X to exit: """)
+    Press 1 to delete data from Furniture table,
+    Press 2 to delete data from Options table,
+    Press 3 to delete data from Customer table,
+    Press 4 to delete data from Orders table,
+    or press X to exit: """)
                     print("")
 
                     if choice4 == "1":
