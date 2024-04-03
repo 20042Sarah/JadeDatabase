@@ -14,7 +14,8 @@ def show_all_styles():
     cursor.execute(sql)
     results = cursor.fetchall()
     db.close()
-    return results
+    for i in results:
+        print(i[0], i[1], i[2])
 
 
 def show_all_options():
@@ -30,7 +31,8 @@ def show_all_options():
     cursor.execute(sql)
     results = cursor.fetchall()
     db.close()
-    return results
+    for i in results:
+        print(i[0], i[1], i[2], i[3], i[4], i[5])
 
 
 def show_options_for_style(Product_ID):
@@ -43,7 +45,8 @@ def show_options_for_style(Product_ID):
     cursor.execute(sql)
     results = cursor.fetchall()
     db.close()
-    return results
+    for i in results:
+        print(i[0], i[1], i[2], i[3], i[4], i[5])
 
 
 def show_all_customers():
@@ -54,7 +57,8 @@ def show_all_customers():
     cursor.execute(sql)
     results = cursor.fetchall()
     db.close()
-    return results
+    for i in results:
+        print(i[0], i[1], i[2], i[3], i[4])
 
 
 def show_all_orders():
@@ -72,7 +76,8 @@ def show_all_orders():
     cursor.execute(sql)
     results = cursor.fetchall()
     db.close()
-    return results
+    for i in results:
+        print(i[0], i[1], i[2], i[3])
 
 
 #   add functions
@@ -180,30 +185,20 @@ while True:
             print("")
 
             if choice2 == "1":
-                results = show_all_styles()
-                for i in results:
-                    print(i[0], i[1], i[2])
+                show_all_styles()
 
             elif choice2 == "2":
-                results = show_all_options()
-                for i in results:
-                    print(i[0], i[1], i[2], i[3], i[4], i[5])
+                show_all_options()
 
             elif choice2 == "3":
                 product = input("Please type an existing product ID: ")
-                results = show_options_for_style(product)
-                for i in results:
-                    print(i[0], i[1], i[2], i[3], i[4], i[5])
+                show_options_for_style(product)
 
             elif choice2 == "4":
-                results = show_all_customers()
-                for i in results:
-                    print(i[0], i[1], i[2], i[3], i[4])
+                show_all_customers()
 
             elif choice2 == "5":
-                results = show_all_orders()
-                for i in results:
-                    print(i[0], i[1], i[2], i[3])
+                show_all_orders()
 
             elif choice2.upper() == "X":
                 break
