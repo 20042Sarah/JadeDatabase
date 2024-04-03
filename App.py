@@ -14,6 +14,7 @@ def show_all_styles():
     cursor.execute(sql)
     results = cursor.fetchall()
     db.close()
+    print("FURNITURE TABLE")
     for i in results:
         print(i[0], i[1], i[2])
 
@@ -31,6 +32,7 @@ def show_all_options():
     cursor.execute(sql)
     results = cursor.fetchall()
     db.close()
+    print("OPTIONS TABLE")
     for i in results:
         print(i[0], i[1], i[2], i[3], i[4], i[5])
 
@@ -57,6 +59,7 @@ def show_all_customers():
     cursor.execute(sql)
     results = cursor.fetchall()
     db.close()
+    print("CUSTOMERS TABLE")
     for i in results:
         print(i[0], i[1], i[2], i[3], i[4])
 
@@ -76,6 +79,7 @@ def show_all_orders():
     cursor.execute(sql)
     results = cursor.fetchall()
     db.close()
+    print("ORDERS TABLE")
     for i in results:
         print(i[0], i[1], i[2], i[3])
 
@@ -240,11 +244,9 @@ while True:
                         name = input("Please enter the new name: ")
                         type = input("Please enter type (e.g. chair or suite): ")
                         add_furniture(name, type)
-                        results = show_all_styles()
                         print("")
                         print("Here is the updated table: ")
-                        for i in results:
-                            print(i[0], i[1], i[2])
+                        show_all_styles()
 
                     elif choice4 == "2":
                         #   adding data to Options table
@@ -290,9 +292,7 @@ while True:
                         print("")
                         add_option(product, seats, width, depth, height, price)
                         print("Here is the updated table: ")
-                        results = show_all_options()
-                        for i in results:
-                            print(i[0], i[1], i[2], i[3], i[4], i[5])
+                        show_all_options()
 
                     elif choice4 == "3":
                         #   adding data to Customers table
@@ -309,9 +309,7 @@ while True:
                         print("")
                         add_customer(first, last, address, phone)
                         print("Here is the updated table: ")
-                        results = show_all_customers()
-                        for i in results:
-                            print(i[0], i[1], i[2], i[3], i[4])
+                        show_all_customers()
 
                     elif choice4 == "4":
                         #   adding data to Orders table
@@ -332,9 +330,7 @@ while True:
                         print("")
                         add_order(customer, product)
                         print("Here is the updated table: ")
-                        results = show_all_orders()
-                        for i in results:
-                            print(i[0], i[1], i[2], i[3])
+                        show_all_orders()
 
                     elif choice4.upper() == "X":
                         break
@@ -356,9 +352,7 @@ while True:
                         print("")
                         delete_furniture(product)
                         print("Here is the updated table: ")
-                        results = show_all_styles()
-                        for i in results:
-                            print(i[0], i[1], i[2])
+                        show_all_styles()
 
                     elif choice4 == "2":
                         #   deleting data from Options table
@@ -366,9 +360,7 @@ while True:
                         print("")
                         delete_options(option)
                         print("Here is the updated table: ")
-                        results = show_all_options()
-                        for i in results:
-                            print(i[0], i[1], i[2], i[3], i[4], i[5])
+                        show_all_options()
 
                     elif choice4 == "3":
                         #   deleting data from Customers table
@@ -376,9 +368,7 @@ while True:
                         print("")
                         delete_customers(customer)
                         print("Here is the updated table: ")
-                        results = show_all_customers()
-                        for i in results:
-                            print(i[0], i[1], i[2], i[3], i[4])
+                        show_all_customers()
 
                     elif choice4 == "4":
                         #   deleting data from Orders table
@@ -387,9 +377,7 @@ while True:
                         print("")
                         delete_orders(customer, product)
                         print("Here is the updated table: ")
-                        results = show_all_orders()
-                        for i in results:
-                            print(i[0], i[1], i[2], i[3])
+                        show_all_orders()
 
                     elif choice4.upper() == "X":
                         break
