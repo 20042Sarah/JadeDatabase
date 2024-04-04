@@ -236,17 +236,6 @@ while True:
                 show_all_options()
 
             elif choice2 == "3":
-                #   while True:
-                #   check = check_id("Product_ID", "Furniture", product)
-                #   if check is False:
-                #   print("That is not an existing product ID.")
-                #   product = input("Please type an existing product ID or type X to exit: ")
-                #   if product.upper() == "X":
-                #   break
-                #   elif check is True:
-                #   break
-                #   if product.upper() == "X":
-                #   break
                 product = check_int("an existing product ID")
                 show_options_for_style(product)
 
@@ -262,7 +251,7 @@ while True:
     elif choice1 == "2":
         admincode = "123"
         while True:
-            password = input("Please enter admin code to continue or type X to exit: ")
+            password = input("Please enter admin code or type X to exit: ")
             if password == admincode:
                 break
             elif password.upper() == "X":
@@ -294,7 +283,7 @@ while True:
                     if choice4 == "1":
                         #   adding data to Furniture table
                         name = input("Please enter the new name: ")
-                        type = input("Please enter type (e.g. chair or suite): ")
+                        type = input("Please enter type (chair or suite): ")
                         add_furniture(name, type)
                         print("")
                         print("Here is the updated table: ")
@@ -315,12 +304,12 @@ while True:
 
                     elif choice4 == "3":
                         #   adding data to Customers table
-                        first = input("Please enter new customer's first name: ")
-                        last = input("Please enter new customer's last name: ")
+                        first = input("Please enter customer's first name: ")
+                        last = input("Please enter customer's last name: ")
                         address = input("Please enter their address: ")
                         while True:
                             try:
-                                phone = input("Please enter their phone number: ")
+                                phone = input("Please enter phone number: ")
                                 check = int(phone)
                                 break
                             except ValueError:
