@@ -196,6 +196,17 @@ def check_int(prompt):
     return num
 
 
+def check_float(prompt):
+    while True:
+        try:
+            num = input("Please type %s: " % prompt)
+            num = float(num)
+            break
+        except ValueError:
+            print("That is not a valid input.")
+    return num
+
+
 #   menu
 print("Welcome to the Jade Furniture Database.")
 while True:
@@ -291,45 +302,12 @@ while True:
 
                     elif choice4 == "2":
                         #   adding data to Options table
-                        while True:
-                            #   could try and check that product id exists
-                            try:
-                                product = input("Please enter existing Product ID: ")
-                                product = int(product)
-                                break
-                            except ValueError:
-                                print("That is not a valid input.")
-                        while True:
-                            try:
-                                seats = input("Please enter number of seats: ")
-                                seats = float(seats)
-                                break
-                            except ValueError:
-                                print("That is not a valid input.")
-                        while True:
-                            try:
-                                width = int(input("Please enter width in mm: "))
-                                break
-                            except ValueError:
-                                print("That is not a valid input.")
-                        while True:
-                            try:
-                                depth = int(input("Please enter depth in mm: "))
-                                break
-                            except ValueError:
-                                print("That is not a valid input.")
-                        while True:
-                            try:
-                                height = int(input("Please enter height in mm: "))
-                                break
-                            except ValueError:
-                                print("That is not a valid input.")
-                        while True:
-                            try:
-                                price = int(input("Please enter price: "))
-                                break
-                            except ValueError:
-                                print("That is not a valid input.")
+                        product = check_int("an existing product ID")
+                        seats = check_float("number of seats")
+                        width = check_int("width in mm")
+                        depth = check_int("depth in mm")
+                        height = check_int("height in mm")
+                        price = check_int("price")
                         print("")
                         add_option(product, seats, width, depth, height, price)
                         print("Here is the updated table: ")
