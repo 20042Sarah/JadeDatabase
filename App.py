@@ -332,20 +332,8 @@ while True:
 
                     elif choice4 == "4":
                         #   adding data to Orders table
-                        while True:
-                            try:
-                                customer = input("Please enter existing Customer ID: ")
-                                customer = int(customer)
-                                break
-                            except ValueError:
-                                print("That is not a valid input.")
-                        while True:
-                            try:
-                                product = input("Please enter existing Option ID: ")
-                                product = int(product)
-                                break
-                            except ValueError:
-                                print("That is not a valid input.")
+                        customer = check_int("an existing customer ID")
+                        product = check_int("an existing option ID")
                         print("")
                         add_order(customer, product)
                         print("Here is the updated table: ")
