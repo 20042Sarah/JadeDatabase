@@ -6,6 +6,8 @@ import sqlite3
 dbname = "Jade1.db"
 
 #   show functions
+
+
 def show_all_styles():
     #   shows all data in the Furniture table
     db = sqlite3.connect(dbname)
@@ -167,14 +169,21 @@ def delete_orders(customer, product):
 
 
 #   menu functions
-def check_ids(idname, table, id):
+def check_id(idname, table, id):
     db = sqlite3.connect(dbname)
     cursor = db.cursor()
     sql = """SELECT %s FROM %s""" % (idname, table)
     cursor.execute(sql)
     db.commit()
     results = cursor.fetchall()
+    print(results)
     db.close()
+    if id in results:
+        check = True
+    else:
+        check = False
+    return check
+
 
 #   menu
 print("Welcome to the Jade Furniture Database.")
@@ -206,6 +215,17 @@ while True:
 
             elif choice2 == "3":
                 product = input("Please type an existing product ID: ")
+                while True:
+                    check = check_id("Product_ID", "Furniture", product)
+                    if check is False:
+                        print("That is not an existing product ID.")
+                        product = input("Please type an existing product ID or type X to exit: ")
+                        if product.upper() == "X":
+                            break
+                    elif check is True:
+                        break
+                if product.upper() == "X":
+                    break
                 show_options_for_style(product)
 
             elif choice2 == "4":
