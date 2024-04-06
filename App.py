@@ -19,8 +19,12 @@ def show_all_styles():
     print("FURNITURE TABLE")
     for row in results:
         for cell in row:
-            width = 20 - len(str(cell))
-            print(cell, width * " ", end=" ")
+            try:
+                cell = int(cell)
+                width = 5 - len(str(cell))
+            except ValueError:
+                width = 20 - len(str(cell))
+            print(cell, width * " ", end=" | ")
         print()
 
 
