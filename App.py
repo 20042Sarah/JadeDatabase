@@ -17,8 +17,11 @@ def show_all_styles():
     results = cursor.fetchall()
     db.close()
     print("FURNITURE TABLE")
-    for i in results:
-        print(i[0], i[1], i[2])
+    for row in results:
+        for cell in row:
+            width = 20 - len(str(cell))
+            print(cell, width * " ", end=" ")
+        print()
 
 
 def show_all_options():
