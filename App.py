@@ -179,14 +179,8 @@ def check_id(idname, table, id):
     results = cursor.fetchall()
     print(results)
     db.close()
-    if len(results) > 0:
-        check = True
-    else:
-        check = False
-    return check
-#   print(check_id("Product_ID", "Furniture", 1))
-#   print(check_id("Product_ID", "Furniture", 20))
-#   exit()
+    return len(results)
+
 
 def check_int(prompt):
     #   checks if input is an integer
