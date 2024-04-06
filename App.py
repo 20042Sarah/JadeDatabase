@@ -170,22 +170,26 @@ def delete_orders(customer, product):
 
 #   menu functions
 def check_id(idname, table, id):
+    #   checks if inputed id exists
     db = sqlite3.connect(dbname)
     cursor = db.cursor()
-    sql = """SELECT %s FROM %s""" % (idname, table)
+    sql = """SELECT * FROM %s WHERE %s = %s""" % (table, idname, id)
     cursor.execute(sql)
     db.commit()
     results = cursor.fetchall()
     print(results)
     db.close()
-    if id in results:
+    if len(results) > 0:
         check = True
     else:
         check = False
     return check
-
+#   print(check_id("Product_ID", "Furniture", 1))
+#   print(check_id("Product_ID", "Furniture", 20))
+#   exit()
 
 def check_int(prompt):
+    #   checks if input is an integer
     while True:
         try:
             num = input("Please type %s: " % prompt)
@@ -197,6 +201,7 @@ def check_int(prompt):
 
 
 def check_float(prompt):
+    #   checks if input is a float
     while True:
         try:
             num = input("Please type %s: " % prompt)
