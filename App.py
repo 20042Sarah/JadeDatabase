@@ -28,22 +28,23 @@ def show_all_styles():
             datatype += [STRWIDTH]
     #   print(datatype)
     headings = cursor.description
-    for columnnum in range(len(headings)):
-        heading = headings[columnnum][0]
+    for column in range(len(headings)):
+        heading = headings[column][0]
         if heading == "Product_ID":
             heading = "ID"
-        print(heading, (datatype[columnnum] - len(heading) )* " ",  end = " | ")
+        print(heading, (datatype[column] - len(heading) )* " ",  end = " | ")
+    print()
+    for column in range(len(datatype)):
+        print((datatype[column] + 1) * "-", end = "-+-")
     print()
     for row in results:
-        for cell in row:
-            try:
-                cell = int(cell)
-                width = 5 - len(str(cell))
-            except ValueError:
-                width = 20 - len(str(cell))
-            print(cell, width * " ", end=" | ")
+        for column in range(len(row)):
+            cell = row[column]
+            print(cell, (datatype[column] - len(str(cell)))* " ",  end = " | ")
         print()
-
+    for column in range(len(datatype)):
+        print((datatype[column] + 1) * "-", end = "-+-")
+    exit()
 
 def show_all_options():
     #   shows all data in the Options table
