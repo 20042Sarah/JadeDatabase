@@ -1,22 +1,39 @@
 #   main application for database
 import sqlite3
 
+#   constants
+DBNAME = "Jade1.db"
+INTWIDTH = 5
+STRWIDTH = 20
+
 
 #   functions
-dbname = "Jade1.db"
 
 #   show functions
 
 
 def show_all_styles():
     #   shows all data in the Furniture table
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = "SELECT * FROM Furniture;"
     cursor.execute(sql)
     results = cursor.fetchall()
     db.close()
-    print("FURNITURE TABLE")
+    datatype = []
+    for cell in results[0]:
+        if isinstance(cell, int):
+            datatype += [INTWIDTH]
+        else:
+            datatype += [STRWIDTH]
+    #   print(datatype)
+    headings = cursor.description
+    for columnnum in range(len(headings)):
+        heading = headings[columnnum][0]
+        if heading == "Product_ID":
+            heading = "ID"
+        print(heading, (datatype[columnnum] - len(heading) )* " ",  end = " | ")
+    print()
     for row in results:
         for cell in row:
             try:
@@ -31,7 +48,7 @@ def show_all_styles():
 def show_all_options():
     #   shows all data in the Options table
     #   changes ProductID to the style's name
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """SELECT Furniture.Name, Options.Seats, Options.Width,
             Options.Depth, Options.Height, Options.Price
@@ -48,7 +65,7 @@ def show_all_options():
 
 def show_options_for_style(Product_ID):
     #   shows all data from the Options table for a certain ProductID
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """SELECT Option_ID, Seats, Width, Depth, Height, Price
                 FROM Options
@@ -62,7 +79,7 @@ def show_options_for_style(Product_ID):
 
 def show_all_customers():
     #   shows all data from the Customers table
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = "SELECT * FROM Customers;"
     cursor.execute(sql)
@@ -76,7 +93,7 @@ def show_all_customers():
 def show_all_orders():
     #   shows all data from the orders table
     #   changes CustomerID to the customer's first and last name
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """SELECT Customers.FirstName, Customers.LastName, Furniture.Name,
                 Options.Option_ID
@@ -96,7 +113,7 @@ def show_all_orders():
 #   add functions
 def add_furniture(name, type):
     #   adds data to Furniture table
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """INSERT INTO Furniture (Name, Type)
                 VALUES ('%s', '%s');""" % (name, type)
@@ -106,7 +123,7 @@ def add_furniture(name, type):
 
 def add_option(product, seats, width, depth, height, price):
     #   adds data to Options table
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """INSERT INTO Options
                 (Product_ID, Seats, Width, Depth, Height, Price)
@@ -118,7 +135,7 @@ def add_option(product, seats, width, depth, height, price):
 
 def add_customer(first, last, address, phone):
     #   adds data to Customers table
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """INSERT INTO Customers (FirstName, LastName, Address, Phone)
                 VALUES ('%s', '%s', '%s', '%s');
@@ -129,7 +146,7 @@ def add_customer(first, last, address, phone):
 
 def add_order(customer, product):
     #   adds data to Orders table
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """INSERT INTO Orders (Customer, Product)
                 VALUES ('%s', '%s');""" % (customer, product)
@@ -140,7 +157,7 @@ def add_order(customer, product):
 #   delete functions
 def delete_furniture(product):
     #   deletes data from Furniture table
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """DELETE FROM Furniture WHERE Product_ID = %s;""" % product
     cursor.execute(sql)
@@ -149,7 +166,7 @@ def delete_furniture(product):
 
 def delete_options(option):
     #   deletes data from Options table
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """DELETE FROM Options WHERE Option_ID = %s;""" % option
     cursor.execute(sql)
@@ -158,7 +175,7 @@ def delete_options(option):
 
 def delete_customers(customer):
     #   deletes data from Customers table
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """DELETE FROM Customers WHERE CustomerID = %s;""" % customer
     cursor.execute(sql)
@@ -167,7 +184,7 @@ def delete_customers(customer):
 
 def delete_orders(customer, product):
     #   deletes data from Orders table
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """DELETE FROM Orders WHERE Customer = %s and Product = %s;
             """ % (customer, product)
@@ -178,7 +195,7 @@ def delete_orders(customer, product):
 #   menu functions
 def check_id(idname, table, id):
     #   checks if inputed id exists
-    db = sqlite3.connect(dbname)
+    db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """SELECT * FROM %s WHERE %s = %s""" % (table, idname, id)
     cursor.execute(sql)
