@@ -12,14 +12,7 @@ STRWIDTH = 20
 #   show functions
 
 
-def show_all_styles():
-    #   shows all data in the Furniture table
-    db = sqlite3.connect(DBNAME)
-    cursor = db.cursor()
-    sql = "SELECT * FROM Furniture;"
-    cursor.execute(sql)
-    results = cursor.fetchall()
-    db.close()
+def display_table(results, headings):
     datatype = []
     for cell in results[0]:
         if isinstance(cell, int):
@@ -27,7 +20,6 @@ def show_all_styles():
         else:
             datatype += [STRWIDTH]
     #   print(datatype)
-    headings = cursor.description
     for column in range(len(headings)):
         heading = headings[column][0]
         if heading == "Product_ID":
@@ -44,6 +36,18 @@ def show_all_styles():
         print()
     for column in range(len(datatype)):
         print((datatype[column] + 1) * "-", end = "-+-")
+
+
+def show_all_styles():
+    #   shows all data in the Furniture table
+    db = sqlite3.connect(DBNAME)
+    cursor = db.cursor()
+    sql = "SELECT * FROM Furniture;"
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    headings = cursor.description
+    db.close()
+    display_table(results, headings)
     exit()
 
 def show_all_options():
