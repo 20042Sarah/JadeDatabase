@@ -324,17 +324,23 @@ while True:
 
                     elif choice4 == "2":
                         #   adding data to Options table
-                        product = check_int("an existing product ID")
-                        seats = check_float("number of seats")
-                        width = check_int("width in mm")
-                        depth = check_int("depth in mm")
-                        height = check_int("height in mm")
-                        price = check_int("price")
-                        print("")
-                        add_option(product, seats, width, depth, height, price)
-                        print("Here is the updated table: ")
-                        show_all_options()
-
+                        while True:
+                            product = input("Please enter the current product ID: ")
+                            check = check_id("Product_ID", "Furniture", product)
+                            if check > 0:
+                                seats = check_float("number of seats")
+                                width = check_int("width in mm")
+                                depth = check_int("depth in mm")
+                                height = check_int("height in mm")
+                                price = check_int("price")
+                                print("")
+                                add_option(product, seats, width, depth, height, price)
+                                print("Here is the updated table: ")
+                                show_all_options()
+                                break
+                            else:
+                                print("That is not an existing product ID.")
+                        
                     elif choice4 == "3":
                         #   adding data to Customers table
                         first = input("Please enter customer's first name: ")
@@ -355,6 +361,7 @@ while True:
                     elif choice4 == "4":
                         #   adding data to Orders table
                         customer = check_int("an existing customer ID")
+                        
                         product = check_int("an existing option ID")
                         print("")
                         add_order(customer, product)
@@ -377,19 +384,31 @@ while True:
 
                     if choice4 == "1":
                         #   deleting data from Furniture table
-                        product = input("Please enter the current Product ID: ")
-                        print("")
-                        delete_furniture(product)
-                        print("Here is the updated table: ")
-                        show_all_styles()
+                        while True:
+                            product = input("Please enter the current product ID: ")
+                            check = check_id("Product_ID", "Furniture", product)
+                            if check > 0:
+                                print("")
+                                delete_furniture(product)
+                                print("Here is the updated table: ")
+                                show_all_styles()
+                                break
+                            else:
+                                print("That is not an existing product ID.")
 
                     elif choice4 == "2":
                         #   deleting data from Options table
-                        option = input("Please enter the current Option ID: ")
-                        print("")
-                        delete_options(option)
-                        print("Here is the updated table: ")
-                        show_all_options()
+                        while True:
+                            option = input("Please enter the current option ID: ")
+                            check = check_id("Product_ID", "Furniture", option)
+                            if check > 0:
+                                print("")
+                                delete_options(option)
+                                print("Here is the updated table: ")
+                                show_all_options()
+                                break
+                            else:
+                                print("That is not an existing product ID.")
 
                     elif choice4 == "3":
                         #   deleting data from Customers table
