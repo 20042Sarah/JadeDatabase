@@ -24,18 +24,18 @@ def display_table(results, headings):
         heading = headings[column][0]
         if heading == "Product_ID":
             heading = "ID"
-        print(heading, (datatype[column] - len(heading) )* " ",  end = " | ")
+        print(heading, (datatype[column] - len(heading)) * " ", end=" | ")
     print()
     for column in range(len(datatype)):
-        print((datatype[column] + 1) * "-", end = "-+-")
+        print((datatype[column] + 1) * "-", end="-+-")
     print()
     for row in results:
         for column in range(len(row)):
             cell = row[column]
-            print(cell, (datatype[column] - len(str(cell)))* " ",  end = " | ")
+            print(cell, (datatype[column] - len(str(cell))) * " ",  end=" | ")
         print()
     for column in range(len(datatype)):
-        print((datatype[column] + 1) * "-", end = "-+-")
+        print((datatype[column] + 1) * "-", end="-+-")
 
 
 def show_all_styles():
@@ -49,6 +49,7 @@ def show_all_styles():
     db.close()
     display_table(results, headings)
     exit()
+
 
 def show_all_options():
     #   shows all data in the Options table
