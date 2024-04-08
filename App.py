@@ -48,7 +48,6 @@ def show_all_styles():
     headings = cursor.description
     db.close()
     display_table(results, headings)
-    exit()
 
 
 def show_all_options():
@@ -207,7 +206,6 @@ def check_id(idname, table, id):
     cursor.execute(sql)
     db.commit()
     results = cursor.fetchall()
-    print(results)
     db.close()
     return len(results)
 
@@ -216,7 +214,7 @@ def check_int(prompt):
     #   checks if input is an integer
     while True:
         try:
-            num = input("Please type %s: " % prompt)
+            num = input("Please enter %s: " % prompt)
             num = int(num)
             break
         except ValueError:
@@ -228,7 +226,7 @@ def check_float(prompt):
     #   checks if input is a float
     while True:
         try:
-            num = input("Please type %s: " % prompt)
+            num = input("Please enter %s: " % prompt)
             num = float(num)
             break
         except ValueError:
@@ -265,8 +263,14 @@ while True:
                 show_all_options()
 
             elif choice2 == "3":
-                product = check_int("an existing product ID")
-                show_options_for_style(product)
+                while True:
+                    product = input("Please enter an existing product ID: ")
+                    check = check_id("Product_ID", "Furniture", product)
+                    if check > 0:
+                        show_options_for_style(product)
+                        break
+                    else:
+                        print("That is not an existing product ID.")
 
             elif choice2 == "4":
                 show_all_customers()
