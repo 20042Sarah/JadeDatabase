@@ -13,6 +13,7 @@ STRWIDTH = 20
 
 
 def display_table(results, headings, idname):
+    #   displays results from a sql query
     datatype = []
     for cell in results[0]:
         if isinstance(cell, int) or isinstance(cell, float):
@@ -232,6 +233,25 @@ def check_float(prompt):
     return num
 
 
+def check_positive(prompt, value):
+    #   checks if input is above or equal to zero
+    if value == "int":
+        while True:
+            num = check_int(prompt)
+            if num > 0:
+                break
+            else:
+                print("That is not a valid input.")
+    elif value == "float":
+        while True:
+            num = check_float(prompt)
+            if num >= 0:
+                break
+            else:
+                print("That is not a valid input.")
+    return num
+
+
 #   menu
 print("Welcome to the Jade Furniture Database.")
 while True:
@@ -326,11 +346,11 @@ while True:
                             product = input("Please enter the current product ID: ")
                             check = check_id("Product_ID", "Furniture", product)
                             if check > 0:
-                                seats = check_float("number of seats")
-                                width = check_int("width in mm")
-                                depth = check_int("depth in mm")
-                                height = check_int("height in mm")
-                                price = check_int("price")
+                                seats = check_positive("number of seats", "float")
+                                width = check_positive("width in mm", "int")
+                                depth = check_positive("depth in mm", "int")
+                                height = check_positive("height in mm", "int")
+                                price = check_positive("price", "int")
                                 print("")
                                 add_option(product, seats, width, depth, height, price)
                                 print("Here is the updated table: ")
