@@ -3,7 +3,7 @@ import sqlite3
 
 #   constants
 DBNAME = "Jade1.db"
-INTWIDTH = 5
+INTWIDTH = 6
 STRWIDTH = 20
 
 
@@ -12,17 +12,17 @@ STRWIDTH = 20
 #   show functions
 
 
-def display_table(results, headings):
+def display_table(results, headings, idname):
     datatype = []
     for cell in results[0]:
-        if isinstance(cell, int):
+        if isinstance(cell, int) or isinstance(cell, float):
             datatype += [INTWIDTH]
         else:
             datatype += [STRWIDTH]
     #   print(datatype)
     for column in range(len(headings)):
         heading = headings[column][0]
-        if heading == "Product_ID":
+        if heading == idname:
             heading = "ID"
         print(heading, (datatype[column] - len(heading)) * " ", end=" | ")
     print()
@@ -36,6 +36,7 @@ def display_table(results, headings):
         print()
     for column in range(len(datatype)):
         print((datatype[column] + 1) * "-", end="-+-")
+    print()
 
 
 def show_all_styles():
@@ -47,7 +48,7 @@ def show_all_styles():
     results = cursor.fetchall()
     headings = cursor.description
     db.close()
-    display_table(results, headings)
+    display_table(results, headings, "Product_ID")
 
 
 def show_all_options():
@@ -62,10 +63,9 @@ def show_all_options():
             ON Options.Product_ID = Furniture.Product_ID;"""
     cursor.execute(sql)
     results = cursor.fetchall()
+    headings = cursor.description
     db.close()
-    print("OPTIONS TABLE")
-    for i in results:
-        print(i[0], i[1], i[2], i[3], i[4], i[5])
+    display_table(results, headings, "Option_ID")
 
 
 def show_options_for_style(Product_ID):
@@ -77,9 +77,9 @@ def show_options_for_style(Product_ID):
                 WHERE Product_ID = %s;""" % Product_ID
     cursor.execute(sql)
     results = cursor.fetchall()
+    headings = cursor.description
     db.close()
-    for i in results:
-        print(i[0], i[1], i[2], i[3], i[4], i[5])
+    display_table(results, headings, "Option_ID")
 
 
 def show_all_customers():
@@ -89,10 +89,9 @@ def show_all_customers():
     sql = "SELECT * FROM Customers;"
     cursor.execute(sql)
     results = cursor.fetchall()
+    headings = cursor.description
     db.close()
-    print("CUSTOMERS TABLE")
-    for i in results:
-        print(i[0], i[1], i[2], i[3], i[4])
+    display_table(results, headings, "CustomerID")
 
 
 def show_all_orders():
@@ -109,10 +108,9 @@ def show_all_orders():
                 Furniture.Product_ID;"""
     cursor.execute(sql)
     results = cursor.fetchall()
+    headings = cursor.description
     db.close()
-    print("ORDERS TABLE")
-    for i in results:
-        print(i[0], i[1], i[2], i[3])
+    display_table(results, headings, "Option_ID")
 
 
 #   add functions
