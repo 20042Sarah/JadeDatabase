@@ -100,8 +100,8 @@ def show_all_orders():
     #   changes CustomerID to the customer's first and last name
     db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
-    sql = """SELECT Customers.FirstName, Customers.LastName, Furniture.Name,
-                Options.Option_ID
+    sql = """SELECT Orders.OrderID, Customers.FirstName, Customers.LastName,
+                Furniture.Name, Options.Option_ID
                 FROM Orders
                 LEFT JOIN Customers ON Orders.Customer = Customers.CustomerID
                 LEFT JOIN Options ON Orders.Product = Options.Option_ID
