@@ -110,8 +110,12 @@ def show_all_orders():
     cursor.execute(sql)
     results = cursor.fetchall()
     headings = cursor.description
+    headings = [x for x in headings if x!= ('OptionID', None, None, None, None, None, None)]
+    headings.append(('Option', ''))
+    #   print(headings)
     db.close()
     display_table(results, headings, "OrderID")
+    exit()
 
 
 #   add functions
@@ -236,6 +240,7 @@ def check_float(prompt):
 def check_positive(prompt, value):
     #   checks if input is above or equal to zero
     if value == "int":
+        #   used for dimension inputs so value must be > 0
         while True:
             num = check_int(prompt)
             if num > 0:
@@ -243,6 +248,7 @@ def check_positive(prompt, value):
             else:
                 print("That is not a valid input.")
     elif value == "float":
+        #   used for # of seats input so can = 0 (ottoman/foot rest)
         while True:
             num = check_float(prompt)
             if num >= 0:
