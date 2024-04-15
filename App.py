@@ -115,7 +115,6 @@ def show_all_orders():
     #   print(headings)
     db.close()
     display_table(results, headings, "OrderID")
-    exit()
 
 
 #   add functions
@@ -190,12 +189,12 @@ def delete_customers(customer):
     db.commit()
 
 
-def delete_orders(customer, product):
+def delete_orders(order):
     #   deletes data from Orders table
     db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
-    sql = """DELETE FROM Orders WHERE Customer = %s and Product = %s;
-            """ % (customer, product)
+    sql = """DELETE FROM Orders WHERE OrderID = %s;
+            """ % (order)
     cursor.execute(sql)
     db.commit()
 
@@ -385,7 +384,6 @@ while True:
                     elif choice4 == "4":
                         #   adding data to Orders table
                         customer = check_int("an existing customer ID")
-                        
                         product = check_int("an existing option ID")
                         print("")
                         add_order(customer, product)
@@ -449,10 +447,10 @@ while True:
 
                     elif choice4 == "4":
                         #   deleting data from Orders table
-                        customer = input("Please enter the current Customer ID: ")
-                        product = input("Please enter the current Option ID: ")
+                        order = input("Please enter the current Order ID: ")
+                        check = check_id("OrderID", "Orders", order)
                         print("")
-                        delete_orders(customer, product)
+                        delete_orders(order)
                         print("Here is the updated table: ")
                         show_all_orders()
 
