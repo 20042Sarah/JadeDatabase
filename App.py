@@ -101,7 +101,7 @@ def show_all_orders():
     db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """SELECT Orders.OrderID, Customers.FirstName, Customers.LastName,
-                Furniture.Name, Options.OptionID
+                Furniture.Name, Options.OptionID as Option
                 FROM Orders
                 LEFT JOIN Customers ON Orders.Customer = Customers.CustomerID
                 LEFT JOIN Options ON Orders.Product = Options.OptionID
@@ -110,9 +110,6 @@ def show_all_orders():
     cursor.execute(sql)
     results = cursor.fetchall()
     headings = cursor.description
-    headings = [x for x in headings if x!= ('OptionID', None, None, None, None, None, None)]
-    headings.append(('Option', ''))
-    #   print(headings)
     db.close()
     display_table(results, headings, "OrderID")
 
