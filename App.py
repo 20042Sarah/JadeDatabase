@@ -49,7 +49,7 @@ def show_all_styles():
     results = cursor.fetchall()
     headings = cursor.description
     db.close()
-    display_table(results, headings, "Product_ID")
+    display_table(results, headings, "ProductID")
 
 
 def show_all_options():
@@ -61,26 +61,26 @@ def show_all_options():
             Options.Depth, Options.Height, Options.Price
             FROM Options
             LEFT JOIN Furniture
-            ON Options.Product_ID = Furniture.Product_ID;"""
+            ON Options.ProductID = Furniture.ProductID;"""
     cursor.execute(sql)
     results = cursor.fetchall()
     headings = cursor.description
     db.close()
-    display_table(results, headings, "Option_ID")
+    display_table(results, headings, "OptionID")
 
 
-def show_options_for_style(Product_ID):
+def show_options_for_style(ProductID):
     #   shows all data from the Options table for a certain ProductID
     db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
-    sql = """SELECT Option_ID, Seats, Width, Depth, Height, Price
+    sql = """SELECT OptionID, Seats, Width, Depth, Height, Price
                 FROM Options
-                WHERE Product_ID = %s;""" % Product_ID
+                WHERE ProductID = %s;""" % ProductID
     cursor.execute(sql)
     results = cursor.fetchall()
     headings = cursor.description
     db.close()
-    display_table(results, headings, "Option_ID")
+    display_table(results, headings, "OptionID")
 
 
 def show_all_customers():
@@ -101,17 +101,17 @@ def show_all_orders():
     db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """SELECT Orders.OrderID, Customers.FirstName, Customers.LastName,
-                Furniture.Name, Options.Option_ID
+                Furniture.Name, Options.OptionID
                 FROM Orders
                 LEFT JOIN Customers ON Orders.Customer = Customers.CustomerID
-                LEFT JOIN Options ON Orders.Product = Options.Option_ID
-                LEFT JOIN Furniture ON Options.Product_ID =
-                Furniture.Product_ID;"""
+                LEFT JOIN Options ON Orders.Product = Options.OptionID
+                LEFT JOIN Furniture ON Options.ProductID =
+                Furniture.ProductID;"""
     cursor.execute(sql)
     results = cursor.fetchall()
     headings = cursor.description
     db.close()
-    display_table(results, headings, "Option_ID")
+    display_table(results, headings, "OrderID")
 
 
 #   add functions
@@ -130,7 +130,7 @@ def add_option(product, seats, width, depth, height, price):
     db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
     sql = """INSERT INTO Options
-                (Product_ID, Seats, Width, Depth, Height, Price)
+                (ProductID, Seats, Width, Depth, Height, Price)
                 VALUES ('%s', '%s', '%s', '%s', '%s', '%s');
                 """ % (product, seats, width, depth, height, price)
     cursor.execute(sql)
@@ -163,7 +163,7 @@ def delete_furniture(product):
     #   deletes data from Furniture table
     db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
-    sql = """DELETE FROM Furniture WHERE Product_ID = %s;""" % product
+    sql = """DELETE FROM Furniture WHERE ProductID = %s;""" % product
     cursor.execute(sql)
     db.commit()
 
@@ -172,7 +172,7 @@ def delete_options(option):
     #   deletes data from Options table
     db = sqlite3.connect(DBNAME)
     cursor = db.cursor()
-    sql = """DELETE FROM Options WHERE Option_ID = %s;""" % option
+    sql = """DELETE FROM Options WHERE OptionID = %s;""" % option
     cursor.execute(sql)
     db.commit()
 
@@ -283,7 +283,7 @@ while True:
             elif choice2 == "3":
                 while True:
                     product = input("Please enter an existing product ID: ")
-                    check = check_id("Product_ID", "Furniture", product)
+                    check = check_id("ProductID", "Furniture", product)
                     if check > 0:
                         show_options_for_style(product)
                         break
@@ -344,7 +344,7 @@ while True:
                         #   adding data to Options table
                         while True:
                             product = input("Please enter the current product ID: ")
-                            check = check_id("Product_ID", "Furniture", product)
+                            check = check_id("ProductID", "Furniture", product)
                             if check > 0:
                                 seats = check_positive("number of seats", "float")
                                 width = check_positive("width in mm", "int")
@@ -404,7 +404,7 @@ while True:
                         #   deleting data from Furniture table
                         while True:
                             product = input("Please enter the current product ID: ")
-                            check = check_id("Product_ID", "Furniture", product)
+                            check = check_id("ProductID", "Furniture", product)
                             if check > 0:
                                 print("")
                                 delete_furniture(product)
@@ -418,7 +418,7 @@ while True:
                         #   deleting data from Options table
                         while True:
                             option = input("Please enter the current option ID: ")
-                            check = check_id("Product_ID", "Furniture", option)
+                            check = check_id("ProductID", "Furniture", option)
                             if check > 0:
                                 print("")
                                 delete_options(option)
