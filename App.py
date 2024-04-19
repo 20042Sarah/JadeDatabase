@@ -384,12 +384,26 @@ while True:
 
                     elif choice4 == "4":
                         #   adding data to Orders table
-                        customer = check_int("an existing customer ID")
-                        product = check_int("an existing option ID")
-                        print("")
-                        add_order(customer, product)
-                        print("Here is the updated table: ")
-                        show_all_orders()
+                        while True:
+                            customer = input("Please enter an existing customer ID: ")
+                            check = check_id("CustomerID", "Customers", customer)
+                            if check > 0:
+                                while True:
+                                    option = input("Please enter an existing option ID: ")
+                                    check = check_id("OptionID", "Options", option)
+                                    if check > 0:
+                                        print("")
+                                        add_order(customer, option)
+                                        print("Here is the updated table: ")
+                                        show_all_orders()
+                                        break
+                                    else:
+                                        print("That is not an existing product ID.")
+                                break
+                            else:
+                                print("That is not an existing product ID.")
+                        
+                        
 
                     elif choice4.upper() == "X":
                         break
