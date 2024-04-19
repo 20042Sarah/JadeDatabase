@@ -199,14 +199,18 @@ def delete_orders(order):
 #   menu functions
 def check_id(idname, table, id):
     #   checks if inputed id exists
-    db = sqlite3.connect(DBNAME)
-    cursor = db.cursor()
-    sql = """SELECT * FROM %s WHERE %s = %s""" % (table, idname, id)
-    cursor.execute(sql)
-    db.commit()
-    results = cursor.fetchall()
-    db.close()
-    return len(results)
+    try:
+        id = int(id)
+        db = sqlite3.connect(DBNAME)
+        cursor = db.cursor()
+        sql = """SELECT * FROM %s WHERE %s = %s""" % (table, idname, id)
+        cursor.execute(sql)
+        db.commit()
+        results = cursor.fetchall()
+        db.close()
+        return len(results)
+    except ValueError:
+        return 0
 
 
 def check_int(prompt):
