@@ -449,16 +449,17 @@ while True:
 
                     elif choice4 == "3":
                         #   deleting data from Customers table
-                        customer = input("Please enter the current Customer ID: ")
-                        check = check_id("CustomerID", "Customers", customer)
-                        if check > 0:
-                            print("")
-                            delete_customers(customer)
-                            print("Here is the updated table: ")
-                            show_all_customers()
-                            break
-                        else:
-                            print("That is not an existing product ID.")
+                        while True:
+                            customer = input("Please enter the current Customer ID: ")
+                            check = check_id("CustomerID", "Customers", customer)
+                            if check > 0:
+                                print("")
+                                delete_customers(customer)
+                                print("Here is the updated table: ")
+                                show_all_customers()
+                                break
+                            else:
+                                print("That is not an existing customer ID.")
 
                     elif choice4 == "4":
                         #   deleting data from Orders table
