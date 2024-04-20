@@ -463,12 +463,17 @@ while True:
 
                     elif choice4 == "4":
                         #   deleting data from Orders table
-                        order = input("Please enter the current Order ID: ")
-                        check = check_id("OrderID", "Orders", order)
-                        print("")
-                        delete_orders(order)
-                        print("Here is the updated table: ")
-                        show_all_orders()
+                        while True:
+                            order = input("Please enter the current Order ID: ")
+                            check = check_id("OrderID", "Orders", order)
+                            if check > 0:
+                                print("")
+                                delete_orders(order)
+                                print("Here is the updated table: ")
+                                show_all_orders()
+                                break
+                            else:
+                                print("That is not an existing order ID.")
 
                     elif choice4.upper() == "X":
                         break
