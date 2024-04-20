@@ -437,7 +437,7 @@ while True:
                         #   deleting data from Options table
                         while True:
                             option = input("Please enter the current option ID: ")
-                            check = check_id("ProductID", "Furniture", option)
+                            check = check_id("OptionID", "Options", option)
                             if check > 0:
                                 print("")
                                 delete_options(option)
